@@ -1,5 +1,21 @@
-<<<<<<< HEAD
 # shiokorityDev
+## 📦 Package Management
+1. Install packages
 
-1. npm install
+```
+npm install
+```
 
+## 🖥️ Running the Project Locally
+2. running the project
+
+```
+npm start
+```
+
+## 🔨 Building the project
+3. project build
+
+```
+npm run build
+```
