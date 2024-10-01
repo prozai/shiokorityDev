@@ -1,58 +1,55 @@
-import React from 'react'
+import React from 'react';
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between p-4 bg-white border-b">
-      {/* Logo */}
-      <div className="flex items-center">
-        <img
-          src="https://stripe.com/img/v3/home/twitter.png"
-          alt="Stripe Logo"
-          className="h-6"
-        />
-        <span className="text-lg font-bold text-blue-600 ml-2">DOCS</span>
+    <header className="flex flex-col items-center p-4 bg-white border-b w-full">
+      {/* Top Row: Logo and Right-side Buttons */}
+      <div className="flex justify-between items-center w-full mb-4">
+        {/* Logo */}
+        <div className="flex items-center">
+          <img
+            src="your-logo-url-here"  // Replace with your logo
+            alt="Shokority Logo"
+            className="h-10"  // Adjust size as needed
+          />
+        </div>
+
+        {/* Create Account and Login Buttons */}
+        <div className="flex space-x-4">
+          <CreateAccount />
+          <Login />
+        </div>
       </div>
+
+      {/* Search Bar */}
+      <SearchBar />
 
       {/* Navigation */}
       <Navigation />
-
-      {/* Search and buttons */}
-      <div className="flex items-center">
-        <SearchBar />
-        <a
-          href="#"
-          className="text-sm font-medium text-blue-600 ml-4 hover:underline"
-        >
-          Create account
-        </a>
-        <button className="ml-4 px-4 py-2 bg-blue-600 text-white text-sm rounded-md">
-          Sign in
-        </button>
-      </div>
     </header>
   );
 }
 
 function Navigation() {
   return (
-    <nav className="ml-8">
-      <ul className="flex space-x-6 text-gray-700 text-sm">
-        <li className="hover:text-blue-600">
+    <nav className="mt-4">
+      <ul className="flex space-x-6 text-[#153247] text-sm">
+        <li className="hover:text-[#1e4b64]">
           <a href="#">Get started</a>
         </li>
-        <li className="hover:text-blue-600">
+        <li className="hover:text-[#1e4b64]">
           <a href="#">Payments</a>
         </li>
-        <li className="hover:text-blue-600">
-          <a href="#">Finance automation</a>
+        <li className="hover:text-[#1e4b64]">
+          <a href="#">Merchant</a>
         </li>
-        <li className="hover:text-blue-600">
-          <a href="#">Platforms and marketplaces</a>
+        <li className="hover:text-[#1e4b64]">
+          <a href="#">Customers</a>
         </li>
-        <li className="hover:text-blue-600">
-          <a href="#">Banking as a service</a>
+        <li className="hover:text-[#1e4b64]">
+          <a href="#">Documentation</a>
         </li>
-        <li className="hover:text-blue-600">
+        <li className="hover:text-[#1e4b64]">
           <a href="#">Developer tools</a>
         </li>
       </ul>
@@ -62,16 +59,16 @@ function Navigation() {
 
 function SearchBar() {
   return (
-    <div className="relative">
+    <div className="relative w-1/2 max-w-lg mt-4">
       <input
         type="text"
         placeholder="Search the docs or ask a question"
-        className="border border-gray-300 rounded-md py-2 px-4 w-64 text-sm"
+        className="border border-gray-300 rounded-md py-2 px-4 w-full text-sm text-[#153247]"
       />
       <span className="absolute right-2 top-2.5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 text-gray-500"
+          className="h-4 w-4 text-[#153247]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -88,3 +85,21 @@ function SearchBar() {
   );
 }
 
+function CreateAccount() {
+  return (
+    <a
+      href="#"
+      className="px-4 py-2 bg-[#153247] text-white text-sm rounded-md hover:bg-[#1e4b64]"
+    >
+      Create account
+    </a>
+  );
+}
+
+function Login() {
+  return (
+    <button className="px-4 py-2 bg-[#153247] text-white text-sm rounded-md hover:bg-[#1e4b64]">
+      Sign in
+    </button>
+  );
+}
