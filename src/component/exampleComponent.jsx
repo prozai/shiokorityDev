@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-function exampleComponent() {
+function ExampleComponent() {
+  const { t } = useTranslation();
+
   return (
-    <div>exampleComponent</div>
-  )
+    <div>{t('exampleComponent')}</div>
+  );
 }
 
-export default exampleComponent
+export default ExampleComponent;
