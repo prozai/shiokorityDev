@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import ExampleComponent from '../component/exampleComponent';
 import LanguageSelector from '../component/LanguageSelector';
 
 function Main() {
@@ -8,8 +7,7 @@ function Main() {
   return (
     <div>
       <LanguageSelector />
-      <h1>{t('main')}</h1>
-      <ExampleComponent />
+      {t('main')}
     </div>
   );
 }
