@@ -4,7 +4,7 @@ import LanguageSelector from '../component/LanguageSelector';
 import Header from '../component/Header';
 import ListComponent from '../component/listComponent';
 import Content from '../component/Content';  // Import the updated Content component
-import DeveloperRegistrationForm from './DeveloperRegistrationForm';
+
 
 function Main() {
   const { t } = useTranslation();  // i18n translation
