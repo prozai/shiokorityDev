@@ -1,6 +1,6 @@
 import React from 'react';
-import shiokorityLogo from '../assets/images/Shiokority.png'; // Relative path from Header.jsx to the image
-
+import { useNavigate } from 'react-router-dom';
+import shiokorityLogo from '../assets/images/Shiokority.png';
 
 export default function Header() {
   return (
@@ -9,9 +9,9 @@ export default function Header() {
       <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <div className="flex items-center">
-          <img src= {shiokorityLogo}  // Replace with your logo
+          <img src={shiokorityLogo}
             alt="Shokority Logo"
-            className="w-39 h-32" // Adjust size as needed
+            className="w-39 h-32"
           />
         </div>
 
@@ -87,13 +87,19 @@ function SearchBar() {
 }
 
 function CreateAccount() {
+  const navigate = useNavigate();
+
+  const handleRegistration = () => {
+    navigate('/register'); // Navigate to the registration form
+  };
+
   return (
-    <a
-      href="#"
+    <button
+      onClick={handleRegistration}
       className="px-4 py-2 bg-[#153247] text-white text-sm rounded-md hover:bg-[#1e4b64]"
     >
-      Create account
-    </a>
+      Register
+    </button>
   );
 }
 
