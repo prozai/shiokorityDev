@@ -104,8 +104,17 @@ function CreateAccount() {
 }
 
 function Login() {
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/login'); // Navigate to the registration form
+  };
+
   return (
-    <button className="px-4 py-2 bg-[#153247] text-white text-sm rounded-md hover:bg-[#1e4b64]">
+    <button 
+      onClick={handleLogin}
+      className="px-4 py-2 bg-[#153247] text-white text-sm rounded-md hover:bg-[#1e4b64]">
       Sign in
     </button>
   );

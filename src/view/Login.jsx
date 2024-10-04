@@ -24,9 +24,18 @@ const Login = () => {
     setIsLoading(true);
     setStatus('');
     try {
-      await DevelopersController.login(formData);
-      setStatus('success');
-      setTimeout(() => navigate('/dashboard'), 1500); // Redirect after 1.5 seconds
+        const response = await DevelopersController.login(formData);
+        
+        if (response.success) {
+        setStatus('success');
+        if (response.two_factor_enabled) {
+            setTimeout(() => navigate('/verify2FA'), 1500); // Redirect after 1.5 seconds
+        } else {
+            setTimeout(() => navigate('/dashboard'), 1500); // Redirect after 1.5 seconds
+        }
+      } else {
+        setStatus('error');
+      }
     } catch (error) {
       setStatus('error');
       console.error('Login error:', error);

@@ -14,6 +14,13 @@ class DevelopersController {
         return Developer.logout();
     }
 
+    static async get2FASetupInfo() {
+        return Developer.get2FASetupInfo();
+    }
+
+    static async verify2FA(code) {
+        return Developer.verify2FA(code);
+    }
 }
 
 export default DevelopersController;
