@@ -19,14 +19,14 @@ function Main() {
         <div className="w-64">
           {/* Sidebar List and Language Selector */}
           <ListComponent onSelectSection={setSelectedSection} />  {/* Pass setSelectedSection */}
-          <LanguageSelector />
+          {/* <LanguageSelector /> */}
         </div>
 
         {/* Render the Content component and pass the selected section */}
         <Content selectedSection={selectedSection} />
 
         {/* i18n content */}
-        <p>{t('main')}</p>
+        {/* <p>{t('main')}</p> */}
       </div>
     </div>
   );

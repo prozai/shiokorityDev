@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="flex flex-col items-center p-4 bg-white border-b w-full">
       {/* Top Row: Logo and Right-side Buttons */}
-      <div className="flex justify-between items-center w-full mb-4">
+      <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <div className="flex items-center">
           <img src= {shiokorityLogo}  // Replace with your logo
