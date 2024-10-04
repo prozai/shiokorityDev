@@ -1,4 +1,6 @@
 import React from 'react';
+import shiokorityLogo from '../assets/images/Shiokority.png'; // Relative path from Header.jsx to the image
+
 
 export default function Header() {
   return (
@@ -7,10 +9,9 @@ export default function Header() {
       <div className="flex justify-between items-center w-full mb-4">
         {/* Logo */}
         <div className="flex items-center">
-          <img
-            src="your-logo-url-here"  // Replace with your logo
+          <img src= {shiokorityLogo}  // Replace with your logo
             alt="Shokority Logo"
-            className="h-10"  // Adjust size as needed
+            className="w-39 h-32" // Adjust size as needed
           />
         </div>
 
