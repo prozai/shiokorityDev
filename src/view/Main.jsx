@@ -4,7 +4,9 @@ import LanguageSelector from '../component/LanguageSelector';
 import Header from '../component/Header';
 import ListComponent from '../component/listComponent';
 import Content from '../component/Content';  // Import the updated Content component
+import Login from '../component/login';  // Import the updated Content component
 import DeveloperRegistrationForm from './DeveloperRegistrationForm';
+
 
 function Main() {
   const { t } = useTranslation();  // i18n translation
@@ -25,7 +27,7 @@ function Main() {
 
         {/* Render the Content component and pass the selected section */}
         <Content selectedSection={selectedSection} />
-
+        <Login />
         {/* i18n content */}
         {/* <p>{t('main')}</p> */}
       </div>
