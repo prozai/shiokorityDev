@@ -8,6 +8,7 @@ import Login from '../component/login';  // Import the updated Content component
 import DeveloperRegistrationForm from './DeveloperRegistrationForm';
 
 
+
 function Main() {
   const { t } = useTranslation();  // i18n translation
   const [selectedSection, setSelectedSection] = useState('Introduction');  // Default to "Introduction"

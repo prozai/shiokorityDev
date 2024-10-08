@@ -9,10 +9,17 @@ export default function Header() {
       <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={shiokorityLogo}
-            alt="Shokority Logo"
+          <img
+            src={shiokorityLogo}
+            alt="Shiokority Logo"
             className="w-39 h-32"
           />
+        </div>
+
+        {/* Centered Search Bar and Navigation */}
+        <div className="flex flex-col items-center">
+          <SearchBar />
+          <Navigation />
         </div>
 
         {/* Create Account and Login Buttons */}
@@ -21,12 +28,6 @@ export default function Header() {
           <Login />
         </div>
       </div>
-
-      {/* Search Bar */}
-      <SearchBar />
-
-      {/* Navigation */}
-      <Navigation />
     </header>
   );
 }
@@ -60,7 +61,7 @@ function Navigation() {
 
 function SearchBar() {
   return (
-    <div className="relative w-1/2 max-w-lg mt-4">
+    <div className="relative w-full max-w-lg mt-4">
       <input
         type="text"
         placeholder="Search the docs or ask a question"
@@ -104,7 +105,6 @@ function CreateAccount() {
 }
 
 function Login() {
-
   const navigate = useNavigate();
 
   const handleLogin = () => {
