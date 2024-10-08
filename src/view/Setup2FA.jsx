@@ -14,12 +14,10 @@ function Setup2FA() {
   useEffect(() => {
     const fetchSetupInfo = async () => {
       try {
-        // Fetch QR code
         const qrResponse = await axios.get('/developers/getQRcode', { responseType: 'blob' });
         const imageUrl = URL.createObjectURL(qrResponse.data);
         setQrCodeUrl(imageUrl);
 
-        // Fetch secret key
         const secretResponse = await axios.get('/developers/getSecretKey');
         setSecretKey(secretResponse.data.secret_key);
 
@@ -55,7 +53,7 @@ function Setup2FA() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-2xl font-bold text-[#153247]">
             Setup Two-Factor Authentication
           </h2>
         </div>
@@ -70,15 +68,13 @@ function Setup2FA() {
               ) : (
                 <p className="text-center">Loading QR code...</p>
               )}
-              <p className="mt-2 text-center text-sm text-gray-600">
-                Or enter this code manually:
-              </p>
-              <p className="text-center font-mono break-all">
+              <p className="mt-2 text-center text-sm text-gray-600">Or enter this code manually:</p>
+              <p className="text-center font-mono break-all text-[#153247]">
                 {secretKey || 'Loading secret key...'}
               </p>
               <button
                 onClick={() => setStep(2)}
-                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#153247] hover:bg-[#1e4b64] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#153247]"
               >
                 Next
               </button>
@@ -91,11 +87,11 @@ function Setup2FA() {
                 value={verificationCode}
                 onChange={(e) => setVerificationCode(e.target.value)}
                 placeholder="Enter verification code"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#153247] focus:border-[#153247] sm:text-sm"
               />
               <button
                 onClick={handleVerification}
-                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#153247] hover:bg-[#1e4b64] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#153247]"
               >
                 Verify
               </button>
@@ -106,7 +102,7 @@ function Setup2FA() {
               <p className="text-center text-green-600 font-semibold">{status}</p>
               <button
                 onClick={handleFinish}
-                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#153247] hover:bg-[#1e4b64] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#153247]"
               >
                 Return to Dashboard
               </button>

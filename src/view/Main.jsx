@@ -27,7 +27,7 @@ function Main() {
 
         {/* Render the Content component and pass the selected section */}
         <Content selectedSection={selectedSection} />
-        <Login />
+        {/* <Login /> */}
         {/* i18n content */}
         {/* <p>{t('main')}</p> */}
       </div>
