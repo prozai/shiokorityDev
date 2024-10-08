@@ -1,6 +1,6 @@
 // src/components/LoginPage.jsx
 import React from 'react';
-import logo from '../assets/logo.png'; // Assuming the logo image is in the assets folder
+import logo from '../assets/images/Shiokority.png'; // Assuming the logo image is in the assets folder
 
 const LoginPage = () => {
   return (
