@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DevelopersController from '../controller/developersController';
+import ShiokorityLogo from '../assets/images/Shiokority.png';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    setFormData(prevData => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -24,15 +19,12 @@ const Login = () => {
     setIsLoading(true);
     setStatus('');
     try {
-        const response = await DevelopersController.login(formData);
-        
-        if (response.success) {
+      const response = await DevelopersController.login(formData);
+      if (response.success) {
         setStatus('success');
-        if (response.two_factor_enabled) {
-            setTimeout(() => navigate('/verify2FA'), 1500); // Redirect after 1.5 seconds
-        } else {
-            setTimeout(() => navigate('/dashboard'), 1500); // Redirect after 1.5 seconds
-        }
+        setTimeout(() => {
+          navigate(response.two_factor_enabled ? '/verify2FA' : '/dashboard');
+        }, 1500);
       } else {
         setStatus('error');
       }
@@ -44,11 +36,13 @@ const Login = () => {
     }
   };
 
-  return (  
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
-        
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div className="flex justify-center">
+          <img src={ShiokorityLogo} alt="Shiokority Logo" className="h-40" />
+        </div>
+
         {status === 'success' && (
           <div className="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">
             Login successful! Redirecting...
@@ -63,9 +57,7 @@ const Login = () => {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               id="email"
@@ -73,14 +65,12 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#153247] focus:border-[#153247]"
               placeholder="Enter your email"
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               id="password"
@@ -88,13 +78,13 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#153247] focus:border-[#153247]"
               placeholder="Enter your password"
             />
           </div>
           <button 
             type="submit" 
-            className={`w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out ${isLoading ? 'opacity-50 cursor-not-allowed' : 'transform hover:-translate-y-0.5'}`}
+            className={`w-full px-4 py-2 bg-[#153247] text-white rounded-md hover:bg-[#1e4b64] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#153247] transition duration-150 ease-in-out ${isLoading ? 'opacity-50 cursor-not-allowed' : 'transform hover:-translate-y-0.5'}`}
             disabled={isLoading}
           >
             {isLoading ? 'Logging in...' : 'Login'}
@@ -102,7 +92,7 @@ const Login = () => {
         </form>
         
         <div className="text-center">
-          <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+          <a href="/forgot-password" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
             Forgot password?
           </a>
         </div>
