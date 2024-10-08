@@ -5,6 +5,7 @@ import Header from '../component/Header';
 import ListComponent from '../component/listComponent';
 import Content from '../component/Content';  // Import the updated Content component
 import Login from '../component/login';  // Import the updated Content component
+import DeveloperRegistrationForm from './DeveloperRegistrationForm';
 
 
 function Main() {
