@@ -29,23 +29,30 @@ class Developers {
         }
     }
 
-    static async get2FASetupInfo() {
-        try {
-            const response = await axios.post(`/setup_totp/user5`, {}, {
-                responseType: 'blob'
-            });
-            return response.data;
-        } catch (error) {
-            return new Error('Something wrong with 2FA setup request');
-        }
-    }
-
     static async verify2FA(code) {
         try {
             const response = await axios.post('/developers/2fa/verify', { code });
             return response.data;
         } catch (error) {
             return new Error('Something wrong with 2FA verification request');
+        }
+    }
+
+    static async getQRcode() {
+        try {
+            const response = await axios.get('/developers/getQRcode', { responseType: 'blob' });
+            return response.data;
+        } catch (error) {
+            return new Error('Something wrong with QR code request');
+        }
+    }
+
+    static async getSecretKey() {
+        try {
+            const response = await axios.get('/developers/getSecretKey');
+            return response.data;
+        } catch (error) {
+            return new Error('Something wrong with secret key request');
         }
     }
 
