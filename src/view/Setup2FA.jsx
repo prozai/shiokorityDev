@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import DevelopersController from '../controller/developersController';
 
 function Setup2FA() {
@@ -12,23 +11,24 @@ function Setup2FA() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchSetupInfo = async () => {
-      try {
-        const qrResponse = await axios.get('/developers/getQRcode', { responseType: 'blob' });
-        const imageUrl = URL.createObjectURL(qrResponse.data);
-        setQrCodeUrl(imageUrl);
-
-        const secretResponse = await axios.get('/developers/getSecretKey');
-        setSecretKey(secretResponse.data.secret_key);
-
-        setStatus('');
-      } catch (error) {
-        setStatus('Failed to fetch 2FA setup info: ' + error.message);
-      }
-    };
 
     fetchSetupInfo();
   }, []);
+
+  const fetchSetupInfo = async () => {
+    try {
+      const qrResponse = await DevelopersController.getQRcode();
+      const imageUrl = URL.createObjectURL(qrResponse);
+      setQrCodeUrl(imageUrl);
+
+      const secretResponse = await DevelopersController.getSecretKey();
+      setSecretKey(secretResponse.secret_key);
+
+      setStatus('');
+    } catch (error) {
+      setStatus('Failed to fetch 2FA setup info: ' + error.message);
+    }
+  };
 
   const handleVerification = async () => {
     try {
