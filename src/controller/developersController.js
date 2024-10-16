@@ -20,6 +20,14 @@ class DevelopersController {
     static async getSecretKey() {
         return await Developer.getSecretKey();
     }
+  // Method to generate an API key
+    static async generateApiKey() {
+        try {
+            return await Developer.generateApiKey();
+        } catch (error) {
+            throw new Error(error.message || 'Failed to generate API key');
+        }
+    }
 }
 
 export default DevelopersController;

@@ -6,6 +6,7 @@ import Login from './view/Login';
 import Dashboard from './view/Dashboard';
 import Setup2FA from './view/Setup2FA';
 import Verify2FA from './view/Verify2FA';
+import GenerateApiKey from './view/GenerateApiKey';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/setup2FA" element={<Setup2FA />} />
         <Route path="/verify2FA" element={<Verify2FA />} />
+        <Route path="/generate-api-key" element={<GenerateApiKey />} />
       </Routes>
     </Router>
   );

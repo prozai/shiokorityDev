@@ -56,6 +56,23 @@ class Developers {
         }
     }
 
+  // API call to generate an API key
+  static async generateApiKey() {
+    try {
+      const response = await axios.post(
+        '/developers/generate-api-key', 
+        {}, // We send an empty object for POST
+        {
+          headers: {
+            'Content-Type': 'application/json' // Explicitly set the content type to application/json
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || 'Error generating API key');
+    }
+  }
 }
 
 export default Developers;
