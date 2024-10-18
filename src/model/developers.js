@@ -56,23 +56,35 @@ class Developers {
         }
     }
 
-  // API call to generate an API key
-  static async generateApiKey() {
-    try {
-      const response = await axios.post(
-        '/developers/generate-api-key', 
-        {}, // We send an empty object for POST
-        {
-          headers: {
-            'Content-Type': 'application/json' // Explicitly set the content type to application/json
-          }
+    // Fetch API keys for the developer
+    static async getApiKeys() {
+        try {
+            const response = await axios.get('/developers/api-keys');
+            return response.data.api_keys;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || 'Error fetching API keys');
         }
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(error.response?.data?.message || 'Error generating API key');
     }
-  }
+
+    // Generate a new API key
+    static async generateApiKey() {
+        try {
+            const response = await axios.post('/developers/generate-api-key');
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || 'Error generating API keys');
+        }
+    }
+
+    // Delete an API key
+    static async deleteApiKey(apiId) {
+        try {
+            const response = await axios.delete(`/developers/api-keys/${apiId}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || 'Error deleting API key');
+        }
+    }
 }
 
 export default Developers;
