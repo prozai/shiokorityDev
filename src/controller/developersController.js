@@ -20,6 +20,32 @@ class DevelopersController {
     static async getSecretKey() {
         return await Developer.getSecretKey();
     }
+    // Get API keys
+    static async getApiKeys() {
+        try {
+        return await Developer.getApiKeys();
+        } catch (error) {
+        throw new Error('Error fetching API keys');
+        }
+    }
+
+    // Generate API key
+    static async generateApiKey() {
+        try {
+        return await Developer.generateApiKey();
+        } catch (error) {
+        throw new Error('Error generating API key');
+        }
+    }
+
+    // Delete API key
+    static async deleteApiKey(apiId) {
+        try {
+        return await Developer.deleteApiKey(apiId);
+        } catch (error) {
+        throw new Error('Error deleting API key');
+        }
+    }
 }
 
 export default DevelopersController;

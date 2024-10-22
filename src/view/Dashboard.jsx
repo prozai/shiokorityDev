@@ -20,6 +20,10 @@ function Dashboard() {
     navigate('/setup2FA');
   };
 
+  const handleGenerateApiKey = () => {
+    navigate('/manageApiKeys')
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-white shadow-sm">
@@ -74,6 +78,12 @@ function Dashboard() {
                   <dt className="text-sm font-medium text-gray-500">Your Role</dt>
                   <dd className="mt-1 text-sm text-[#153247] sm:mt-0 sm:col-span-2">Developer</dd>
                 </div>
+                <button
+                onClick={handleGenerateApiKey}
+                className="px-4 py-2 bg-[#153247] text-white rounded-md hover:bg-[#1e4b64] transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#153247] focus:ring-opacity-50"
+              >
+                Manage API Keys
+              </button>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Last Login</dt>
                   <dd className="mt-1 text-sm text-[#153247] sm:mt-0 sm:col-span-2">
