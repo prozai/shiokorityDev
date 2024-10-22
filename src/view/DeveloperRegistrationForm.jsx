@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import DevelopersController from '../controller/developersController';
 import { useNavigate } from 'react-router-dom';
+import ShiokorityLogo from '../assets/images/Shiokority.png'; // Assuming there's a logo for consumer as well
+
 
 const DeveloperRegister = () => {
   const navigate = useNavigate();
@@ -64,9 +66,20 @@ const DeveloperRegister = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    navigate('/'); // Redirect to home
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+         {/* Logo at the top left */}
+         <img
+          src={ShiokorityLogo} // Use appropriate logo
+          alt="Shiokority"
+          className="h-20 mb-4 cursor-pointer"
+          onClick={handleLogoClick}
+        />
         <h2 className="text-2xl font-bold text-center text-[#153247] mb-6">Developer Registration</h2>
         {message && (
           <div className={`mb-4 p-2 rounded ${message.includes('successfully') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -146,6 +159,11 @@ const DeveloperRegister = () => {
           >
             Register
           </button>
+          <div className="text-center">
+          <a href="/" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
+            Back
+          </a>
+          </div>
         </form>
       </div>
     </div>

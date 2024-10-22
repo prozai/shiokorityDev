@@ -36,11 +36,15 @@ const Login = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    navigate('/'); // Redirect to home
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
     <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="flex justify-center">
-          <img src={ShiokorityLogo} alt="Shiokority Logo" className="h-40" />
+          <img src={ShiokorityLogo} alt="Shiokority Logo" className="h-40 cursor-pointer" onClick={handleLogoClick} />
         </div>
 
         {status === 'success' && (
@@ -94,6 +98,11 @@ const Login = () => {
         <div className="text-center">
           <a href="/forgot-password" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
             Forgot password?
+          </a>
+        </div>
+        <div className="text-center">
+          <a href="/" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
+            Back
           </a>
         </div>
       </div>

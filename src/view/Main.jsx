@@ -19,18 +19,16 @@ function Main() {
       <Header />
 
       {/* Main Layout: Sidebar (ListComponent) + Content Area */}
-      <div className="flex flex-grow">
-        <div className="w-64">
-          {/* Sidebar List and Language Selector */}
-          <ListComponent onSelectSection={setSelectedSection} />  {/* Pass setSelectedSection */}
-          {/* <LanguageSelector /> */}
+      <div className="flex flex-grow overflow-hidden">
+        <div className="w-64 bg-gray-100 border-r">
+          {/* Sidebar List */}
+          <ListComponent onSelectSection={setSelectedSection} />
         </div>
 
-        {/* Render the Content component and pass the selected section */}
-        <Content selectedSection={selectedSection} />
-        {/* <Login /> */}
-        {/* i18n content */}
-        {/* <p>{t('main')}</p> */}
+        {/* Content area with padding and scroll support */}
+        <div className="flex-1 p-4 overflow-y-auto">
+          <Content selectedSection={selectedSection} />
+        </div>
       </div>
     </div>
   );

@@ -1,105 +1,71 @@
+// Content.jsx
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import markdownFile from '../content/shiokority-api-documentation.md';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default function Content({ selectedSection }) {
-  const [content, setContent] = useState('');
   const [sections, setSections] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // Fetch the Markdown file content
   useEffect(() => {
-    fetch(markdownFile)
+    fetch('/content/shiokority-api-documentation.md')
       .then((response) => response.text())
       .then((text) => {
-        setContent(text);
-        parseSections(text); // Parse sections immediately after fetching
-        setLoading(false); // Set loading to false once content is fetched
+        parseSections(text);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching markdown file:', error);
+        console.error('Error loading markdown file:', error);
         setLoading(false);
       });
   }, []);
 
-  // Parse the markdown content into sections (## and ###)
   const parseSections = (text) => {
-    const sectionsObj = {};
+    const tokens = marked.lexer(text);
+    const sectionContent = {};
+    let currentSection = '';
+    let currentSubSection = '';
 
-    // Split the markdown by "## " to isolate second-level sections
-    const topSections = text.split('\n## ');
-
-    topSections.forEach((section) => {
-      const sectionLines = section.split('\n');
-      const sectionTitle = sectionLines[0].trim(); // Get the first line as section title
-
-      // Further split the section content by "###" to capture third-level sections
-      const subSections = section.split('\n### ');
-      const subSectionsObj = {};
-
-      // Loop over the sub-sections
-      subSections.forEach((subSection, index) => {
-        if (index === 0) {
-          // The first entry is the main section (before any "###"), store it as a top-level section
-          sectionsObj[sectionTitle.toLowerCase()] = `## ${subSection.trim()}`;
-        } else {
-          // Store third-level subsections
-          const subSectionTitle = subSection.split('\n')[0].trim();
-          subSectionsObj[subSectionTitle.toLowerCase()] = `### ${subSection.trim()}`;
-        }
-      });
-
-      // Attach the third-level subsections to the main section
-      if (Object.keys(subSectionsObj).length > 0) {
-        sectionsObj[sectionTitle.toLowerCase()] = {
-          content: sectionsObj[sectionTitle.toLowerCase()],
-          subSections: subSectionsObj,
-        };
+    tokens.forEach(token => {
+      if (token.type === 'heading' && token.depth === 2) {
+        currentSection = token.text;
+        sectionContent[currentSection] = '';
+        currentSubSection = ''; 
+      } else if (token.type === 'heading' && token.depth === 3 && currentSection) {
+        currentSubSection = `${currentSection}/${token.text}`;
+        sectionContent[currentSubSection] = '';
+      } else if (currentSection) {
+        const targetSection = currentSubSection || currentSection;
+        sectionContent[targetSection] += marked.parser([token]);
       }
     });
 
-    setSections(sectionsObj);
+    setSections(sectionContent);
   };
 
-  // Function to format the content, replacing "{}" with inline code blocks
-  const formatSectionContent = (content) => {
-    // Replace "{}" with backticks for inline code
-    const formattedContent = content.replace(/{(.*?)}/g, '`$1`');
-    return formattedContent;
-  };
-
-  // Get the content of the selected section
   const getSectionContent = () => {
-    if (loading) {
-      return 'Loading...'; // Show loading message if content is being fetched
-    }
-
-    if (!content) {
-      return 'No content available'; // Show message if content is empty
-    }
-
-    // Split selectedSection into main section and potential subsection
-    const [mainSection, subSection] = selectedSection.toLowerCase().split(' / ');
-
-    const mainContent = sections[mainSection];
-    if (!mainContent) {
-      return 'Section not found'; // If the section doesn't exist
-    }
-
-    // Check if we're looking for a subsection
-    if (typeof mainContent === 'object' && subSection) {
-      const subContent = mainContent.subSections[subSection];
-      return subContent ? formatSectionContent(subContent) : 'Subsection not found';
-    }
-
-    // Otherwise, return the main section content
-    return formatSectionContent(mainContent.content || mainContent);
+    if (!sections[selectedSection]) return '<p>Section not found</p>';
+    return DOMPurify.sanitize(sections[selectedSection]);
   };
+
+  const breadcrumbs = selectedSection.split('/').map((crumb, index) => (
+    <span key={index} className="text-gray-500">
+      {crumb}
+      {index < selectedSection.split('/').length - 1 && ' / '}
+    </span>
+  ));
 
   return (
-    <div className="p-8 bg-white w-full">
-      {/* Render only the selected section */}
-      <ReactMarkdown>{getSectionContent()}</ReactMarkdown>
+    <div className="p-6 bg-white border rounded-lg shadow-md">
+      {loading ? 'Loading...' : (
+        <>
+          <nav className="mb-4 text-sm text-gray-500">{breadcrumbs}</nav>
+          <div
+            className="prose prose-lg max-w-none text-gray-800 prose-a:text-blue-600 prose-code:bg-blue-100 prose-code:text-blue-700 prose-code:rounded-md prose-code:px-2 prose-code:py-1 prose-pre:bg-gray-100 prose-pre:p-4 prose-pre:rounded-lg"
+            dangerouslySetInnerHTML={{ __html: getSectionContent() }}
+          />
+        </>
+      )}
     </div>
   );
 }
