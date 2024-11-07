@@ -14,6 +14,7 @@ class Developers {
     static async login(data) {
         try {
             const response = await axios.post('/developers/login', data);
+            localStorage.setItem('isLoggedIn', response.data.success);
             return response.data;
         } catch (error) {
             return new Error('Something wrong with login request');
