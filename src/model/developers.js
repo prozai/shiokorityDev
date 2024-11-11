@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from '../services/api';
 
 class Developers {
     
     static async registerDeveloper(data) {
         try {
-            const response = await axios.post('/developers/register', data);
+            const response = await api.post('/developers/register', data);
             return response.data;
         } catch (error) {
             return new Error('Something wrong with regisration request'); 
@@ -13,8 +13,12 @@ class Developers {
 
     static async login(data) {
         try {
-            const response = await axios.post('/developers/login', data);
+            const response = await api.post('/developers/login', data);
             localStorage.setItem('isLoggedIn', response.data.success);
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('refresh_token', response.data.refresh_token);
+            console.log(response.data);
+
             return response.data;
         } catch (error) {
             return new Error('Something wrong with login request');
@@ -23,7 +27,7 @@ class Developers {
 
     static async logout() {
         try {
-            const response = await axios.post('/developers/logout');
+            const response = await api.post('/developers/logout');
             return response.data;
         } catch (error) {
             return new Error('Something wrong with logout request');
@@ -32,7 +36,7 @@ class Developers {
 
     static async verify2FA(code) {
         try {
-            const response = await axios.post('/developers/2fa/verify', { code });
+            const response = await api.post('/developers/2fa/verify', { code });
             return response.data;
         } catch (error) {
             return new Error('Something wrong with 2FA verification request');
@@ -41,7 +45,7 @@ class Developers {
 
     static async getQRcode() {
         try {
-            const response = await axios.get('/developers/getQRcode', { responseType: 'blob' });
+            const response = await api.get('/developers/getQRcode', { responseType: 'blob' });
             return response.data;
         } catch (error) {
             return new Error('Something wrong with QR code request');
@@ -50,7 +54,7 @@ class Developers {
 
     static async getSecretKey() {
         try {
-            const response = await axios.get('/developers/getSecretKey');
+            const response = await api.get('/developers/getSecretKey');
             return response.data;
         } catch (error) {
             return new Error('Something wrong with secret key request');
@@ -60,7 +64,7 @@ class Developers {
     // Fetch API keys for the developer
     static async getApiKeys() {
         try {
-            const response = await axios.get('/developers/api-keys');
+            const response = await api.get('/developers/api-keys');
             return response.data.api_keys;
         } catch (error) {
             throw new Error(error.response?.data?.message || 'Error fetching API keys');
@@ -70,7 +74,7 @@ class Developers {
     // Generate a new API key
     static async generateApiKey() {
         try {
-            const response = await axios.post('/developers/generate-api-key');
+            const response = await api.post('/developers/generate-api-key');
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.message || 'Error generating API keys');
@@ -80,7 +84,7 @@ class Developers {
     // Delete an API key
     static async deleteApiKey(apiId) {
         try {
-            const response = await axios.delete(`/developers/api-keys/${apiId}`);
+            const response = await api.delete(`/developers/api-keys/${apiId}`);
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.message || 'Error deleting API key');

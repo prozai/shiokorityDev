@@ -96,11 +96,6 @@ const Login = () => {
         </form>
         
         <div className="text-center">
-          <a href="/forgot-password" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
-            Forgot password?
-          </a>
-        </div>
-        <div className="text-center">
           <a href="/" className="text-sm text-[#153247] hover:text-[#1e4b64] hover:underline">
             Back
           </a>
