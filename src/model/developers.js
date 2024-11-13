@@ -28,6 +28,7 @@ class Developers {
     static async logout() {
         try {
             const response = await api.post('/developers/logout');
+            localStorage.clear();
             return response.data;
         } catch (error) {
             return new Error('Something wrong with logout request');
